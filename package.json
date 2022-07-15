@@ -1,0 +1,15 @@
+{
+  "name": "quiz-land",
+  "version": "1.0.0",
+  "description": "A quiz app to create and attend online quizzes.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Aman Gupta, Ayushi Yadav, Manas Rawat",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
