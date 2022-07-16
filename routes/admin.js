@@ -1,5 +1,7 @@
 const router = require('express').Router();
 
+const quizInterface = require("../modules/quizInterface.js");
+
 const mongoose = require("mongoose");
 
 const User = require("../models/user.js");
@@ -78,10 +80,13 @@ router.get("/admin/logout", (req, res) => {
     res.redirect("/");
 })
 
-router.post("/admin/newQuiz/post", isAuthenticated, (req, res) => {
-    console.log(req.user);
-    console.log(req.body);
-    res.send({status: "OK"});
+router.post("/admin/newQuiz/post", isAuthenticated, async (req, res) => {
+    const response = await quizInterface.saveQuiz(req.user, req.body);
+
+    if(response){
+        res.send({status: "OK"});
+    }
+    else res.send({status: "FAILED"});
 })
 
 module.exports = router;

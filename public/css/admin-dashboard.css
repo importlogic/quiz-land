@@ -70,6 +70,10 @@
 #quizlandIcon {
   height: 100px;
 }
+
+.sidebar-links{
+  cursor: pointer;
+}
   
 .list-group-item {
   border: none;

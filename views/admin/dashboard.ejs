@@ -19,11 +19,11 @@
                 <img src="/images/quiz-land-logo.png" id="quizlandIcon">
             </div>
             <div class="list-group list-group-flush my-3">
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active" id="menu-dashboard">
+                <a class="list-group-item list-group-item-action bg-transparent second-text active sidebar-links" id="menu-dashboard">
                     <i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold" id="menu-create">
+                <a class="list-group-item list-group-item-action bg-transparent second-text fw-bold sidebar-links" id="menu-create">
                     <i class="fas fa-plus-circle me-2"></i>Create Quiz</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <a class="list-group-item list-group-item-action bg-transparent second-text fw-bold sidebar-links">
                     <i class="fas fa-chart-line me-2"></i>Analytics</a>
                 <a href="/admin/logout" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
                     <i class="fas fa-power-off me-2"></i>Logout</a>
@@ -114,7 +114,7 @@
 
             <div id="create-page" class="hidden">
                 <div class="container-fluid create-page-container">
-                    <form>
+                    <form onsubmit="return false">
                         <legend>Quiz Maker</legend>
 
                         <div class="form-floating mb-3">

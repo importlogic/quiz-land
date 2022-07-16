@@ -66,7 +66,10 @@ removeQuestion.addEventListener("click", () => {
         document.querySelector(`#question-${numberOfQuestion}`).remove();
         --numberOfQuestion;
     }
-})
+    else{
+        alert("Please add a question first.");
+    }
+});
 
 submit.addEventListener("click", async () => {
     if(numberOfQuestion == 0){
@@ -99,10 +102,10 @@ submit.addEventListener("click", async () => {
         const res = await axios(config);
         console.log(res);
         if(res.data.status != "OK"){
-            console.log("error");
+            alert("Couldn't submit quiz. Please try again after some time.");
         }
         else{
-            window.location.href = "http://localhost:3000/admin/dashboard";
+            location.reload();
         }
     }
-})
+});
