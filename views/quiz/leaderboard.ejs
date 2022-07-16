@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
+	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" 
+	ntegrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" 
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/quiz-leaderboard.css">
+</head>
+<body>
+
+        <div class="row leaderboardCon">
+            <div class="col-11 col-md-9 leaderboardBox " >
+                    <div class="header">
+                        <a href="/" target="_blank">
+                            <div class="logo">
+                                <img src="/images/quiz-land-logo.png" alt="logo">
+                                Quiz Land
+                            </div>
+                         </a>
+                    </div>
+
+                    <div class="title">
+                    </div>
+
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-10 col-md-6 col-lg-4 myRank hidden">
+                            <div class="row topRow">
+                                <div class="col-6 d-Center"> Your Rank </div>
+                                <div class="col-6 d-Center"> Your Score </div>
+                            </div>
+                            <div class="row bottomRow">
+                                <div class="col-6 d-Center"> 1 </div>
+                                <div class="col-6 d-Center"> 100 </div>
+                            </div>
+                        </div>
+            
+                        <div class="col-11 col-lg-9 mainCon ">
+                            
+                            <div class="rankBox row" style="background-color: #edeef0; font-weight: 600;">
+                                <div class="col-2 d-Center"> Rank </div>
+                                <div class="col-7"> Name </div>
+                                <div class="col-3 d-Center"> Score </div>
+                            </div>
+            
+                            <div class="rankBox row">
+                                <div class="col-2 d-Center"> <span class="colorBox gold">1</span> </div>
+                                <div class="col-7"> Aagam </div>
+                                <div class="col-3 d-Center"> <span class="colorBox gold">100</span> </div>
+                            </div>
+            
+                            <div class="rankBox row">
+                                <div class="col-2 d-Center"> <span class="colorBox silver">2</span> </div>
+                                <div class="col-7">Manas</div>
+                                <div class="col-3 d-Center"> <span class="colorBox silver">100</span> </div>
+                            </div>
+
+                            <div class="rankBox row">
+                                <div class="col-2 d-Center"> <span class="colorBox bronze">3</span> </div>
+                                <div class="col-7"> Harendra </div>
+                                <div class="col-3 d-Center"> <span class="colorBox bronze">100</span> </div>
+                            </div>
+            
+                            <div class="rankBox row">
+                                <div class="col-2 d-Center"> <span class="colorBox grey">4</span> </div>
+                                <div class="col-7"> Shivam </div>
+                                <div class="col-3 d-Center"> <span class="colorBox grey">70</span> </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+      
+    
+
+
+
+    <!-- JavaScript Bundle with Popper -->
+    <script>
+        const username = "<%= username %>";
+        const response = <%- JSON.stringify(response) %>;
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" 
+    crossorigin="anonymous"></script>
+    <script src="/javascript/quiz-leaderboard.js"></script>
+</body>
+</html>

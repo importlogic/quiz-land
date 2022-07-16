@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
+	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" 
+	ntegrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" 
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/quiz-mainPage.css">
+    <link rel="stylesheet" id="loaderEnabler" href="">
+</head>
+<body>
+        <span class="loader"></span>
+
+        <div class="loader-background">
+            <div id="fullScreenToggle">
+                <i class="fa-solid fa-expand"></i>
+            </div>
+
+            <div class="row header">
+                <div class="col-12 quiz-title">
+                </div>
+                <button class="nextBtn">Next</button>
+            </div>
+
+            <div class="row display-center p-3">
+                <div class="col-12 col-md-9 col-lg-7 question">
+                </div>
+            </div>
+
+            <div class="row options p-2 d-flex justify-content-center">
+                <input type="text" name="answer" id="answer" value="" style="display: none;">
+                <div class="col-11 col-md-9 col-lg-5 opt optA" id="A"><i class="fa-solid fa-square"></i>Option - A<i class="fa-solid fa-circle-check"></i></div>
+                <div class="col-11 col-md-9 col-lg-5 opt optB" id="B"><i class="fa-solid fa-circle"></i>  Option - B <i class="fa-solid fa-circle-check"></i></div>
+                <div class="col-11 col-md-9 col-lg-5 opt optC" id="C"><i class="fa-solid fa-play"></i>  Option - C <i class="fa-solid fa-circle-check"></i></div>
+                <div class="col-11 col-md-9 col-lg-5 opt optD" id="D"><i class="fa-solid fa-diamond"></i>  Option - D <i class="fa-solid fa-circle-check"></i></div>        
+            </div>
+        </div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js" integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script>
+        const response = <%- JSON.stringify(response) %>;
+        const username = "<%= username %>";
+    </script>
+    <script src="/javascript/quiz-mainPage.js"></script>
+</body>
+</html>

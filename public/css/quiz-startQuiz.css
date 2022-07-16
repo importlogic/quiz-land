@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+.row{
+    margin: 0;
+}
+body{
+    background-color: #6460aa;
+    font-family: 'Open Sans', sans-serif;
+}
+.con{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mainCon{
+    width: 50%;
+    background-color: white;
+    border: 1px solid #999;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 10px #444;
+    background-color: #f4f4f4;
+    position: relative;
+    display: block;
+    margin: 10px 10px;
+}
+.top-element{
+    margin-top: 200px;
+}
+.header{
+    background-color: white;
+    border-bottom: 1px solid #999;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+a{
+    text-decoration: none;
+}
+.header .logo{
+    padding: 5px 10px;
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid #999;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    color: #444;
+}
+.header img{
+    width: 30px;
+}
+.header .logo:hover{
+    transform: scale(1.04);
+}
+.title{
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    margin: 5px;
+    padding: 5px;
+}
+.error{
+    background-color: rgb(255, 215, 215);
+    color: red;
+    border-bottom: 1px solid red;
+    font-size: 14px;
+    text-align: center;
+    padding: 5px;
+}
+.okValidate{
+    background-color: rgb(226, 255, 215);
+    color: green;
+    border-bottom: 1px solid green;
+    font-size: 14px;
+    text-align: center;
+    padding: 5px;
+}
+.inputVal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+input[type="text"]{
+    width: 90%;
+    margin: 10px 0;
+    outline: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+input[type="text"]:focus{
+    border: 2px solid #006ca2;
+}
+.cusBtn{
+    width: 100px;
+    margin-bottom: 10px;
+    border: 2px solid #006ca2;
+    background-color: #0281c2;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+}
+.note{
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+}
+.instructions{
+    text-align: left;
+    height: 250px;
+    overflow-y: scroll;
+    font-size: 1.2rem;
+}
+
+
+
+@media only screen and (max-width: 850px) {
+    .title{
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .mainCon{
+        width: 95%;
+    }
+    .top-element{
+        margin-top: 20px;
+    }
+  }
+
+.hidden {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+  }
