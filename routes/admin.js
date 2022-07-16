@@ -51,6 +51,9 @@ function isAuthenticated(req, res, next){
 }
 
 router.get("/admin/login", (req, res) => {
+    if(req.user){
+        res.redirect("/admin/dashboard");
+    }
     res.render("./admin/login.ejs")
 })
 
@@ -64,13 +67,21 @@ router.get("/admin/loginSuccess", passport.authenticate("google"), (req, res) =>
 });
 
 router.get("/admin/dashboard", isAuthenticated, (req, res) => {
-    res.render("./admin/dashboard.ejs");
-})
+    res.render("./admin/dashboard.ejs", {
+        user: req.user
+    });
+});
 
 router.get("/admin/logout", (req, res) => {
     req.logout();
     req.session = null;
-    res.send(req.user);
+    res.redirect("/");
+})
+
+router.post("/admin/newQuiz/post", isAuthenticated, (req, res) => {
+    console.log(req.user);
+    console.log(req.body);
+    res.send({status: "OK"});
 })
 
 module.exports = router;

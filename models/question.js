@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const questionSchema = new mongoose.Schema({
-    question: String,
+    questionText: String,
     optionA: String,
     optionB: String,
     optionC: String,
