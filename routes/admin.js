@@ -76,7 +76,9 @@ router.post("/admin/newQuiz/post", authMiddleware.isAuthenticated, async (req, r
     if(response){
         res.send({status: "OK"});
     }
-    else res.send({status: "FAILED"});
+    else {
+        res.send({status: "FAILED"});
+    }
 })
 
 module.exports = router;
