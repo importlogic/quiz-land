@@ -34,7 +34,6 @@ var user;
 var leaderboardList = [];
 var quizList = [];
 
-
 fetchData();
 
 async function fetchData(){
@@ -139,21 +138,17 @@ function updateDashboard(){
         document.querySelector(".dashboardQuizTable").innerHTML += toinsert;
         totalParticipants += current.participantsList.length;
 
-
         ++serial;
     }
     document.querySelector(".participantCount").innerHTML = totalParticipants;
 
     serial = 1;
     for(var i in quizList){
-        document.querySelector(`#copy-${serial}`).addEventListener("click", async (event) => {
-            const rank = event.currentTarget.id.slice(5);
-            const quizID = quizList[rank - 1].quizID;
+        if(quizList[i].isLive == true){
+            document.querySelector(`#copy-${serial}`).addEventListener("click", async (event) => {
+                const rank = event.currentTarget.id.slice(5);
+                const quizID = quizList[rank - 1].quizID;
 
-            if(quizList[rank - 1].isLive == false){
-                alert("Cannot generate new link. The quiz has ended.");
-            }
-            else{
                 var newLink = await createMapping(quizID);
                 newLink = quizStartLink + newLink;
 
@@ -161,19 +156,19 @@ function updateDashboard(){
 
                 navigator.clipboard.writeText(newLink);
                 alert(`Invite Link\n${newLink}\nhas been copied to Clipboard`);
-            }
-        })
-        document.querySelector(`#end-quiz-${serial}`).addEventListener("click", async (event) => {
-            const rank = event.currentTarget.id.slice(9);
-            const quizID = quizList[rank - 1].quizID;
+            })
+            document.querySelector(`#end-quiz-${serial}`).addEventListener("click", async (event) => {
+                const rank = event.currentTarget.id.slice(9);
+                const quizID = quizList[rank - 1].quizID;
 
-            if(quizList[rank - 1].isLive == false){
-                alert("Quiz has already ended.");
-            }
-            else{
                 await endQuiz(quizID);
-            }
-        })
+            })
+        }
+        else{
+            document.querySelector(`#copy-${serial}`).classList.add("hidden");
+            document.querySelector(`#end-quiz-${serial}`).classList.add("hidden");
+        }
+
         ++serial;
     }
 
