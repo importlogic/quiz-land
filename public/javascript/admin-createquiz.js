@@ -72,6 +72,8 @@ removeQuestion.addEventListener("click", () => {
 });
 
 submit.addEventListener("click", async () => {
+    loader.setAttribute("href", "/css/loader.css");
+
     if(numberOfQuestion == 0){
         alert("Please enter atleast 1 question.");
     }
@@ -110,4 +112,5 @@ submit.addEventListener("click", async () => {
             location.reload();
         }
     }
+    loader.setAttribute("href", null);
 });

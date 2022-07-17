@@ -75,7 +75,7 @@ nextBtn.addEventListener("click", async () => {
     loaderEnabler.setAttribute("href", "/css/loader.css");
 
     const config = {
-        url: `/quiz/updateLeaderboard/${quizID}`,
+        url: `/api/update-leaderboard/${quizID}`,
         method: "post",
         data: {
             username, 

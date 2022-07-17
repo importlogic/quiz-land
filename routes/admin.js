@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const quizInterface = require("../modules/quizInterface.js");
+const authMiddleware = require("../middlewares/auth.js");
 
 const mongoose = require("mongoose");
 
@@ -43,15 +44,6 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-function isAuthenticated(req, res, next){
-    if(req.user){
-        next();
-    }
-    else{
-        res.redirect("/admin/login");
-    }
-}
-
 router.get("/admin/login", (req, res) => {
     if(req.user){
         res.redirect("/admin/dashboard");
@@ -68,10 +60,8 @@ router.get("/admin/loginSuccess", passport.authenticate("google"), (req, res) =>
     res.redirect("/admin/dashboard");
 });
 
-router.get("/admin/dashboard", isAuthenticated, (req, res) => {
-    res.render("./admin/dashboard.ejs", {
-        user: req.user
-    });
+router.get("/admin/dashboard", authMiddleware.isAuthenticated, (req, res) => {
+    res.render("./admin/dashboard.ejs");
 });
 
 router.get("/admin/logout", (req, res) => {
@@ -80,7 +70,7 @@ router.get("/admin/logout", (req, res) => {
     res.redirect("/");
 })
 
-router.post("/admin/newQuiz/post", isAuthenticated, async (req, res) => {
+router.post("/admin/newQuiz/post", authMiddleware.isAuthenticated, async (req, res) => {
     const response = await quizInterface.saveQuiz(req.user, req.body);
 
     if(response){

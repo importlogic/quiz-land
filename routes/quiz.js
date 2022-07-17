@@ -37,19 +37,6 @@ router.post("/quiz/play", async (req, res) => {
     }
 })
 
-router.post("/quiz/updateLeaderboard/:quizID", async (req, res) => {
-    const quizID = req.params.quizID;
-
-    const response = await quizInterface.updateLeaderboard(quizID, req.body);
-
-    if(response){
-        res.send({status: "OK"});
-    }
-    else{
-        res.send({status: "FAILED"});
-    }
-});
-
 router.get("/quiz/leaderboard/:quizID", async (req, res) => {
     const quizID = req.params.quizID;
 

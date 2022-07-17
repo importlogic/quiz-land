@@ -1,16 +1,13 @@
 const mongoose = require("mongoose");
-const crypto = require("crypto");
+
+const hashGenerator = require("./hashGenerator.js");
 
 const User = require("../models/user.js")
 const Quiz = require("../models/quiz.js");
 const Leaderboard = require("../models/leaderboard.js");
 
 const saveQuiz = async (userData, quizData) => {
-    var id = "";
-    for(var i = 0; i < 6; i++) id += Math.floor(Math.random() * 10);
-    id = crypto.createHash('sha256').update(id).digest('hex');
-    const offset = Math.floor(Math.random() * 56);
-    id = id.slice(offset, offset + 9);
+    var id = hashGenerator.generate9();
 
     const newQuiz = new Quiz({
         quizID: id,

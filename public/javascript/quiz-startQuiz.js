@@ -34,9 +34,6 @@ validateID.onclick = async () => {
     if(response.data.status == "OK"){
         okMessage.innerHTML = "Invite Code verified. Please enter username.";
         okMessage.classList.remove("hidden");
-        setTimeout(() => {
-            okMessage.classList.add("hidden");
-        }, 5 * 1000);
         quizidDiv.classList.add("hidden");
         usernameDiv.classList.remove("hidden");
     }
@@ -68,9 +65,6 @@ validateUsername.onclick = async () => {
     if(response.data.status == "OK"){
         okMessage.innerHTML = "Username Valid. You are ready to start the quiz.";
         okMessage.classList.remove("hidden");
-        setTimeout(() => {
-            okMessage.classList.add("hidden");
-        }, 5 * 1000);
         usernameDiv.classList.add("hidden");
         startQuizDiv.classList.remove("hidden");
     }
