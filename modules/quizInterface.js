@@ -120,10 +120,35 @@ const mapLink = async (quizID) => {
     return response;
 }
 
+const retrieveMapLink = async (quizID) => {
+    const response = await LinkMapper.findOne({hashLink: quizID});
+
+    if(response == null){
+        return response;
+    }
+    else return response.quizID;
+}
+
+const retrieveAndRemoveMapLink = async (quizID) => {
+    const response = await LinkMapper.findOne({hashLink: quizID});
+    var result = "";
+
+    if(response == null){
+        return response;
+    }
+    else{
+        result = response.quizID;
+        await response.remove();
+        return result;
+    }
+}
+
 module.exports = {
     saveQuiz,
     getQuiz,
     updateLeaderboard,
     getLeaderboard,
-    mapLink
+    mapLink,
+    retrieveMapLink,
+    retrieveAndRemoveMapLink
 }

@@ -5,9 +5,14 @@ const authMiddleware = require("../middlewares/auth.js");
 
 router.post("/api/validator/:item", async (req, res) => {
     const toValidate = req.params.item;
+    var quizID = req.body.quizID;
 
-    if(toValidate == "id"){
-        const quizID = req.body.quizID;
+    quizID = await quizInterface.retrieveMapLink(quizID);
+
+    if(quizID == null){
+        res.send({status: "FAILED"});
+    }
+    else if(toValidate == "id"){
         const quizData = await quizInterface.getQuiz(quizID);
         
         if(quizData == null){
@@ -18,20 +23,24 @@ router.post("/api/validator/:item", async (req, res) => {
         }
     }
     else if(toValidate == "username"){
-        const quizID = req.body.quizID;
         const username = req.body.username;
 
-        const leaderboard = await quizInterface.getLeaderboard(quizID);
-
-        const result = leaderboard.participantsList.find((element) => {
-            return element.username == username;
-        })
-
-        if(result == undefined){
-            res.send({status: "OK"});
+        if(username == ""){
+            res.send({status: "FAILED"});
         }
         else{
-            res.send({status: "FAILED"});
+            const leaderboard = await quizInterface.getLeaderboard(quizID);
+
+            const result = leaderboard.participantsList.find((element) => {
+                return element.username == username;
+            })
+
+            if(result == undefined){
+                res.send({status: "OK"});
+            }
+            else{
+                res.send({status: "FAILED"});
+            }
         }
     }
 })

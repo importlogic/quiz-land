@@ -18,22 +18,29 @@ router.get("/quiz/start", async (req,res) => {
 });
 
 router.post("/quiz/play", async (req, res) => {
-    const invite = req.body.quizID;
+    var invite = req.body.quizID;
     const username = req.body.username;
 
-    const response = await quizInterface.getQuiz(invite);
-    
-    if(response == null){
+    invite = await quizInterface.retrieveAndRemoveMapLink(invite);
+
+    if(invite == null){
         res.redirect("/quiz/start");
     }
     else{
-        for(var i in response.questions){
-            response.questions[i].correctOption = "lol";
+        const response = await quizInterface.getQuiz(invite);
+        
+        if(response == null){
+            res.redirect("/quiz/start");
         }
-        res.render("./quiz/mainPage.ejs",{
-            response,
-            username
-        });
+        else{
+            for(var i in response.questions){
+                response.questions[i].correctOption = "lol";
+            }
+            res.render("./quiz/mainPage.ejs",{
+                response,
+                username
+            });
+        }
     }
 })
 
@@ -51,7 +58,10 @@ router.get("/quiz/leaderboard/:quizID", async (req, res) => {
     const response = await quizInterface.getLeaderboard(quizID);
 
     if(response == null){
-        res.send({message: "not found"});
+        res.status(404).render("broken.ejs",
+        {
+            code: "404"
+        });
     }
     else{
         res.render("./quiz/leaderboard.ejs", {

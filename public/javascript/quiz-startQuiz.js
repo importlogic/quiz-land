@@ -1,3 +1,8 @@
+// -----Prevent right click -------
+document.addEventListener("contextmenu", function (e){
+    e.preventDefault();
+}, false);
+
 const quizidHolder = document.querySelector("#shortId");
 const usernameHolder = document.querySelector("#userName");
 const quizidDiv = document.querySelector(".quizidInput");
@@ -80,5 +85,6 @@ validateUsername.onclick = async () => {
 startQuiz.onclick = () => {
     loader.setAttribute("href", "/css/loader.css");
     document.querySelector(".mainForm").submit();
+    location.reload();
 }
 

@@ -1,7 +1,7 @@
 // -----Prevent right click -------
-// document.addEventListener("contextmenu", function (e){
-//     e.preventDefault();
-// }, false);
+document.addEventListener("contextmenu", function (e){
+    e.preventDefault();
+}, false);
 
 const redirector = document.querySelector("#redirectorDummy");
 const redirectorUrl = document.querySelector("#redirectorUrl");
@@ -21,7 +21,7 @@ var btnArr = ["A","B","C","D"];
 const questionsList = quizData.questions;
 var questionsDone = 0;
 
-// retrieve original id from dummy id 
+
 const quizID = quizData.quizID;
 
 
@@ -103,6 +103,7 @@ nextBtn.addEventListener("click", async () => {
             localStorage.setItem(`submitted-${quizID}-${username}`, "true");
             redirectorUrl.value = `/quiz/leaderboard/${quizID}?watch=${username}`;
             redirector.submit();
+            window.close();
         }
         else setNextQuestion();
     }

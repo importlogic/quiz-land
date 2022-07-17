@@ -1,5 +1,6 @@
 const loader = document.querySelector("#loaderEnabler");
 const quizStartLink = "http://localhost:3000/quiz/start?invite=";
+const quizLeaderboardLink = "http://localhost:3000/quiz/leaderboard/";
 
 // sidebar 
 const pages = [ "dashboard-page", "create-page"];
@@ -121,30 +122,66 @@ function updateDashboard(){
             return element.quizID == quizList[i].quizID;
         }) 
 
+        const link = quizLeaderboardLink + quizList[i].quizID;
         const toinsert = `
                             <tr>
                                 <th scope="row">${serial}</th>
                                 <td>${quizList[i].quizName}</td>
                                 <td>${current.participantsList.length}</td>
-                                <td>${quizList[i].quizID} &nbsp <button id="copy-${serial}"><i class="far fa-copy"></i></button></td>
+                                <td id="copy-${serial}-text">No Link Generated</td>
+                                <td>
+                                    <button id="copy-${serial}">Generate new Link&nbsp<i class="far fa-copy"></i></button>
+                                    <button onclick="window.open('${link}')">Leaderboard&nbsp<i class="fas fa-user"></i></button>
+                                </td>
                             </tr>
                         `;
         document.querySelector(".dashboardQuizTable").innerHTML += toinsert;
         totalParticipants += current.participantsList.length;
+
+
         ++serial;
     }
     document.querySelector(".participantCount").innerHTML = totalParticipants;
 
     serial = 1;
     for(var i in quizList){
-        const link = quizStartLink + quizList[i].quizID;
+        document.querySelector(`#copy-${serial}`).addEventListener("click", async (event) => {
+            const rank = event.currentTarget.id.slice(5);
+            const quizID = quizList[rank - 1].quizID;
 
-        document.querySelector(`#copy-${serial}`).addEventListener("click", () => {
-            navigator.clipboard.writeText(link);
-            alert("Invite Link copied to Clipboard");
+            var newLink = await createMapping(quizID, rank);
+            newLink = quizStartLink + newLink;
+
+            document.querySelector(`#copy-${rank}-text`).innerHTML = newLink;
+
+            navigator.clipboard.writeText(newLink);
+            alert(`Invite Link\n${newLink}\nhas been copied to Clipboard`);
         })
         ++serial;
     }
 
     loader.setAttribute("href", "");
+}
+
+async function createMapping(quizID, rank){
+    var toreturn = "";
+
+    const config = {
+        url: "/api/mapUniqueID",
+        method: "post",
+        data: {
+            quizID
+        }
+    }
+
+    const axiosResponse = await axios(config);
+
+    if(axiosResponse.data.status == "OK"){
+        toreturn = axiosResponse.data.hashID;
+    }
+    else{
+        alert("Couldn't create new Link. Please try again later.")
+    }
+
+    return toreturn;
 }

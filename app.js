@@ -34,3 +34,16 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`working on port ${PORT}`);
 })
+
+app.use((req, res, next) => {
+    res.status(404).render("broken.ejs", {
+        code: "404"
+    })
+})
+
+app.use((err, req, res, next) => {
+    console.error(err.stack)
+    res.status(500).render("broken.ejs", {
+        code: "500"
+    })
+})
