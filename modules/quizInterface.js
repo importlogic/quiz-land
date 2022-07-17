@@ -5,9 +5,10 @@ const hashGenerator = require("./hashGenerator.js");
 const User = require("../models/user.js")
 const Quiz = require("../models/quiz.js");
 const Leaderboard = require("../models/leaderboard.js");
+const LinkMapper = require("../models/linkMapper.js");
 
 const saveQuiz = async (userData, quizData) => {
-    var id = hashGenerator.generate9();
+    const id = hashGenerator.generate9();
 
     const newQuiz = new Quiz({
         quizID: id,
@@ -100,9 +101,29 @@ const getLeaderboard = async (quizID) => {
     return response;
 }
 
+const mapLink = async (quizID) => {
+    const hashID = hashGenerator.generate9();
+    var response = hashID;
+
+    const newMapping = new LinkMapper({
+        hashLink: hashID,
+        quizID: quizID
+    });
+
+    newMapping.save((err, res) => {
+        if(err){
+            console.log(err);
+            response = false;
+        }
+    })
+
+    return response;
+}
+
 module.exports = {
     saveQuiz,
     getQuiz,
     updateLeaderboard,
-    getLeaderboard
+    getLeaderboard,
+    mapLink
 }

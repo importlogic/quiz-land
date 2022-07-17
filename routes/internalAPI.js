@@ -81,6 +81,19 @@ router.post("/api/get-quiz", async (req, res) => {
     }
 })
 
+router.post("/api/mapUniqueID", async (req, res) => {
+    const quizID = req.body.quizID;
+
+    const response = await quizInterface.mapLink(quizID);
+
+    if(response){
+        res.send({status: "OK", hashID: response});
+    }
+    else{
+        res.send({status: "FAILED"});
+    }
+})
+
 router.post("/api/redirector", async (req, res) => {
     const url = req.body.url;
     res.redirect(url);

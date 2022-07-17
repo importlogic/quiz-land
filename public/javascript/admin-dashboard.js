@@ -1,4 +1,5 @@
 const loader = document.querySelector("#loaderEnabler");
+const quizStartLink = "http://localhost:3000/quiz/start?invite=";
 
 // sidebar 
 const pages = [ "dashboard-page", "create-page"];
@@ -119,12 +120,13 @@ function updateDashboard(){
         const current = leaderboardList.find((element) => {
             return element.quizID == quizList[i].quizID;
         }) 
+
         const toinsert = `
                             <tr>
                                 <th scope="row">${serial}</th>
                                 <td>${quizList[i].quizName}</td>
                                 <td>${current.participantsList.length}</td>
-                                <td>${quizList[i].quizID}</td>
+                                <td>${quizList[i].quizID} &nbsp <button id="copy-${serial}"><i class="far fa-copy"></i></button></td>
                             </tr>
                         `;
         document.querySelector(".dashboardQuizTable").innerHTML += toinsert;
@@ -132,6 +134,17 @@ function updateDashboard(){
         ++serial;
     }
     document.querySelector(".participantCount").innerHTML = totalParticipants;
+
+    serial = 1;
+    for(var i in quizList){
+        const link = quizStartLink + quizList[i].quizID;
+
+        document.querySelector(`#copy-${serial}`).addEventListener("click", () => {
+            navigator.clipboard.writeText(link);
+            alert("Invite Link copied to Clipboard");
+        })
+        ++serial;
+    }
 
     loader.setAttribute("href", "");
 }
