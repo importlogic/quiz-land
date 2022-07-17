@@ -13,6 +13,7 @@ const saveQuiz = async (userData, quizData) => {
     const newQuiz = new Quiz({
         quizID: id,
         quizName: quizData.quizName,
+        isLive: true,
         questions: quizData.questions
     });
 
@@ -143,6 +144,27 @@ const retrieveAndRemoveMapLink = async (quizID) => {
     }
 }
 
+const endQuiz = async (quizID) => {
+    var toreturn = true;
+
+    const response = await Quiz.findOne({quizID});
+
+    if(response == null){
+        toreturn = false;
+    }
+    else{
+        response.isLive = false;
+        response.save((err, res) => {
+            if(err){
+                console.log(err);
+                toreturn = false;
+            }
+        })
+    }
+
+    return toreturn;
+}
+
 module.exports = {
     saveQuiz,
     getQuiz,
@@ -150,5 +172,6 @@ module.exports = {
     getLeaderboard,
     mapLink,
     retrieveMapLink,
-    retrieveAndRemoveMapLink
+    retrieveAndRemoveMapLink,
+    endQuiz
 }

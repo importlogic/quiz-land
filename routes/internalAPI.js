@@ -19,7 +19,7 @@ router.post("/api/validator/:item", async (req, res) => {
             res.send({status: "FAILED"});
         }
         else {
-            res.send({status: "OK"});
+            res.send({status: "OK", isLive: quizData.isLive});
         }
     }
     else if(toValidate == "username"){
@@ -97,6 +97,19 @@ router.post("/api/mapUniqueID", async (req, res) => {
 
     if(response){
         res.send({status: "OK", hashID: response});
+    }
+    else{
+        res.send({status: "FAILED"});
+    }
+})
+
+router.post("/api/endQuiz", async (req, res) => {
+    const quizID = req.body.quizID;
+
+    const response = await quizInterface.endQuiz(quizID);
+
+    if(response){
+        res.send({status: "OK"});
     }
     else{
         res.send({status: "FAILED"});

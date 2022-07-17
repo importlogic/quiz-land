@@ -37,10 +37,19 @@ validateID.onclick = async () => {
     loader.setAttribute("href", "");
 
     if(response.data.status == "OK"){
-        okMessage.innerHTML = "Invite Code verified. Please enter username.";
-        okMessage.classList.remove("hidden");
-        quizidDiv.classList.add("hidden");
-        usernameDiv.classList.remove("hidden");
+        if(response.data.isLive){
+            okMessage.innerHTML = "Invite Code verified. Please enter username.";
+            okMessage.classList.remove("hidden");
+            quizidDiv.classList.add("hidden");
+            usernameDiv.classList.remove("hidden");
+        }
+        else{
+            errorMessage.innerHTML = "Cannot enter the Quiz. It has been ended by Admin.";
+            errorMessage.classList.remove("hidden");
+            setTimeout(() => {
+                errorMessage.classList.add("hidden");
+            }, 5 * 1000);
+        }
     }
     else{
         errorMessage.innerHTML = "Invite Code Invalid or Expired";

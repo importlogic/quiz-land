@@ -131,7 +131,8 @@ function updateDashboard(){
                                 <td id="copy-${serial}-text">No Link Generated</td>
                                 <td>
                                     <button id="copy-${serial}">Generate new Link&nbsp<i class="far fa-copy"></i></button>
-                                    <button onclick="window.open('${link}')">Leaderboard&nbsp<i class="fas fa-user"></i></button>
+                                    <button onclick="window.open('${link}')">Leaderboard&nbsp<i class="far fa-user"></i></button>
+                                    <button id="end-quiz-${serial}">End Quiz&nbsp<i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
                         `;
@@ -149,13 +150,29 @@ function updateDashboard(){
             const rank = event.currentTarget.id.slice(5);
             const quizID = quizList[rank - 1].quizID;
 
-            var newLink = await createMapping(quizID, rank);
-            newLink = quizStartLink + newLink;
+            if(quizList[rank - 1].isLive == false){
+                alert("Cannot generate new link. The quiz has ended.");
+            }
+            else{
+                var newLink = await createMapping(quizID);
+                newLink = quizStartLink + newLink;
 
-            document.querySelector(`#copy-${rank}-text`).innerHTML = newLink;
+                document.querySelector(`#copy-${rank}-text`).innerHTML = newLink;
 
-            navigator.clipboard.writeText(newLink);
-            alert(`Invite Link\n${newLink}\nhas been copied to Clipboard`);
+                navigator.clipboard.writeText(newLink);
+                alert(`Invite Link\n${newLink}\nhas been copied to Clipboard`);
+            }
+        })
+        document.querySelector(`#end-quiz-${serial}`).addEventListener("click", async (event) => {
+            const rank = event.currentTarget.id.slice(9);
+            const quizID = quizList[rank - 1].quizID;
+
+            if(quizList[rank - 1].isLive == false){
+                alert("Quiz has already ended.");
+            }
+            else{
+                await endQuiz(quizID);
+            }
         })
         ++serial;
     }
@@ -163,7 +180,7 @@ function updateDashboard(){
     loader.setAttribute("href", "");
 }
 
-async function createMapping(quizID, rank){
+async function createMapping(quizID){
     var toreturn = "";
 
     const config = {
@@ -184,4 +201,24 @@ async function createMapping(quizID, rank){
     }
 
     return toreturn;
+}
+
+async function endQuiz(quizID){
+    const config = {
+        url: "/api/endQuiz",
+        method: "post",
+        data: {
+            quizID
+        }
+    }
+
+    const axiosResponse = await axios(config);
+
+    if(axiosResponse.data.status == "OK"){
+        alert("Quiz has ended.");
+        await fetchData();
+    }
+    else{
+        alert("Failed to delete quiz please try again later.");
+    }
 }
