@@ -17,39 +17,6 @@ router.get("/quiz/start", async (req,res) => {
     })
 });
 
-router.post("/quiz/validator/:item", async (req, res) => {
-    const toValidate = req.params.item;
-
-    if(toValidate == "id"){
-        const quizID = req.body.quizID;
-        const quizData = await quizInterface.getQuiz(quizID);
-        
-        if(quizData == null){
-            res.send({status: "FAILED"});
-        }
-        else {
-            res.send({status: "OK"});
-        }
-    }
-    else if(toValidate == "username"){
-        const quizID = req.body.quizID;
-        const username = req.body.username;
-
-        const leaderboard = await quizInterface.getLeaderboard(quizID);
-
-        const result = leaderboard.participantsList.find((element) => {
-            return element.username == username;
-        })
-
-        if(result == undefined){
-            res.send({status: "OK"});
-        }
-        else{
-            res.send({status: "FAILED"});
-        }
-    }
-})
-
 router.post("/quiz/play", async (req, res) => {
     const invite = req.body.quizID;
     const username = req.body.username;

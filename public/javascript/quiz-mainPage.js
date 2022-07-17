@@ -3,6 +3,8 @@
 //     e.preventDefault();
 // }, false);
 
+const redirector = document.querySelector("#redirectorDummy");
+const redirectorUrl = document.querySelector("#redirectorUrl");
 const loaderEnabler = document.querySelector("#loaderEnabler"); 
 const question = document.querySelector(".question");
 const optA = document.querySelector(".optA");
@@ -61,6 +63,15 @@ function setNextQuestion(){
 }
 
 nextBtn.addEventListener("click", async () => {
+    var submitted = localStorage.getItem(`submitted-${quizID}-${username}`);
+    if(submitted == null) submitted = "false";
+
+    if(submitted == "true"){
+        redirectorUrl.value = `/quiz/leaderboard/${quizID}?watch=${username}`;
+        redirector.submit();
+        return;
+    }
+
     loaderEnabler.setAttribute("href", "/css/loader.css");
 
     const config = {
@@ -89,7 +100,9 @@ nextBtn.addEventListener("click", async () => {
         ++questionsDone;
 
         if(questionsDone == questionsList.length){
-            window.location.href = `http://localhost:3000/quiz/leaderboard/${quizID}?watch=${username}`;
+            localStorage.setItem(`submitted-${quizID}-${username}`, "true");
+            redirectorUrl.value = `/quiz/leaderboard/${quizID}?watch=${username}`;
+            redirector.submit();
         }
         else setNextQuestion();
     }

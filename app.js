@@ -23,6 +23,8 @@ const generalRouter = require("./routes/index.js");
 app.use(generalRouter);
 const quizRouter = require("./routes/quiz.js");
 app.use(quizRouter);
+const internalAPI = require("./routes/internalAPI.js");
+app.use(internalAPI);
 
 const mongoose = require("mongoose");
 mongoose.connect(`${process.env.MONGO_URL}/testing`);

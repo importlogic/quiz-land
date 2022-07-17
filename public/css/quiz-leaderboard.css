@@ -56,18 +56,18 @@ a{
     padding: 5px;
     margin: 10px;
 }
-.myRank{
+.myInfoHeader{
     border: 1px solid #aaa;
     background-color: white;
     padding: 10px;
     margin-bottom: 5px;
     border-radius: 20px;
 }
-.myRank .topRow{
+.myInfoHeader .topRow{
     font-size: 12px;
     font-weight: 600;
 }
-.myRank .bottomRow{
+.myInfoHeader .bottomRow{
     font-weight: 600;
     font-size: 18px;
 }

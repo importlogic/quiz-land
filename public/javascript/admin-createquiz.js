@@ -79,8 +79,10 @@ submit.addEventListener("click", async () => {
         var questions = [];
         const quizName = document.querySelector(".quizName").value;
         for(var i = 1; i < numberOfQuestion + 1; i++){
+            var text = document.querySelector(`.questionText${i}`).value;
+            text = text.replace(/(?:\r\n|\r|\n)/g, '<br>');
             var nextQuestion = {
-                questionText: document.querySelector(`.questionText${i}`).value,
+                questionText: text,
                 optionA: document.querySelector(`.optionA${i}`).value,
                 optionB: document.querySelector(`.optionB${i}`).value,
                 optionC: document.querySelector(`.optionC${i}`).value,

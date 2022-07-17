@@ -21,7 +21,7 @@ validateID.onclick = async () => {
     invite = quizidHolder.value;
 
     const config = {
-        url: "/quiz/validator/id",
+        url: "/api/validator/id",
         method: "post",
         data: {
             quizID: invite
@@ -53,7 +53,7 @@ validateUsername.onclick = async () => {
     loader.setAttribute("href", "/css/loader.css");
     username = usernameHolder.value;
     const config = {
-        url: "/quiz/validator/username",
+        url: "/api/validator/username",
         method: "post",
         data: {
             quizID: invite,
