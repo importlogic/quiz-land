@@ -68,7 +68,6 @@ router.get("/admin/logout", (req, res) => {
 })
 
 router.post("/admin/newQuiz/post", authMiddleware.isAuthenticated, async (req, res) => {
-    console.log(req.body)
     const response = await quizInterface.saveQuiz(req.user, req.body);
 
     if(response){

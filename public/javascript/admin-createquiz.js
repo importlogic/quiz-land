@@ -12,7 +12,7 @@ document.querySelector("#timerInput").addEventListener("input", (event) => {
     const input = event.target;
     var value = event.target.value;
 
-    if(value == "") value = 0;
+    if(value == "") value = "0";
 
     value = value.replace('.', '');
     input.value = value;

@@ -164,3 +164,9 @@ body{
 .hidden {
     display: none;
 }
+
+.timer{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}

@@ -13,6 +13,8 @@ const quizSchema = new mongoose.Schema({
     quizID: String,
     quizName: String,
     isLive: Boolean,
+    timerState: Number,
+    timerValue: Number,
     questions: [ questionSchema ]
 });
 

@@ -14,6 +14,8 @@ const saveQuiz = async (userData, quizData) => {
         quizID: id,
         quizName: quizData.quizName,
         isLive: true,
+        timerState: quizData.timerState,
+        timerValue: quizData.timerValue,
         questions: quizData.questions
     });
 

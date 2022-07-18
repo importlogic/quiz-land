@@ -3,6 +3,16 @@ document.addEventListener("contextmenu", function (e){
     e.preventDefault();
 }, false);
 
+
+// prevent refresh 
+document.addEventListener('keydown', (e) => {
+    e = e || window.event;
+    if(e.keyCode == 116 || e.ctrlKey && e.keyCode == 82 || e.keyCode == 122){
+        e.preventDefault();
+    }
+});
+
+
 const redirector = document.querySelector("#redirectorDummy");
 const redirectorUrl = document.querySelector("#redirectorUrl");
 const loaderEnabler = document.querySelector("#loaderEnabler"); 
@@ -24,6 +34,47 @@ var questionsDone = 0;
 
 const quizID = quizData.quizID;
 
+var timeLeft = 0;
+
+const myModal = new bootstrap.Modal(document.querySelector("#exampleModalCenter"));
+
+document.querySelector("#leaderboardButton").addEventListener("click", () => {
+    redirectorUrl.value = `/quiz/leaderboard/${quizID}?watch=${username}`;
+    redirector.submit();
+    window.close();
+})
+
+if(quizData.timerState){
+    document.querySelector(".timer").classList.remove("hidden");
+    timeLeft = quizData.timerValue;
+    refreshTimer();
+}
+
+async function refreshTimer(){
+    var hours = Math.floor(timeLeft / 3600);
+    var minutes = Math.floor(timeLeft / 60) % 60;
+    var seconds = timeLeft % 60;
+
+    hours = "0" + hours;
+    if(minutes < 10) minutes = "0" + minutes;
+    if(seconds < 10) seconds = "0" + seconds;
+
+    var currentTime = `${minutes} : ${seconds}`;
+    if(hours != 0) currentTime = `${hours} : ` + currentTime;
+
+    document.querySelector("#timeLeft").innerHTML = currentTime;
+
+    --timeLeft;
+
+    if(timeLeft == -1){
+        localStorage.setItem(`submitted-${quizID}-${username}`, "true");
+        myModal.show();
+    }
+    else{
+        setTimeout(refreshTimer, 1000);
+    }
+}
+
 
 btnArr.forEach(button => {
     document.querySelector(`#${button}`).addEventListener('click',()=>{
@@ -32,7 +83,6 @@ btnArr.forEach(button => {
         })
         document.querySelector(`#${button}`).classList.add("okActive");
         answer.value = button;
-        console.log(button);
     });
 });
 
@@ -62,7 +112,7 @@ function setNextQuestion(){
     optD.innerHTML = `<i class="fa-solid fa-diamond"></i>${questionsList[questionsDone].optionD}<i class="fa-solid fa-circle-check"</i>`;
 }
 
-nextBtn.addEventListener("click", async () => {
+nextBtn.addEventListener("click", async (event) => {
     var submitted = localStorage.getItem(`submitted-${quizID}-${username}`);
     if(submitted == null) submitted = "false";
 
@@ -101,10 +151,10 @@ nextBtn.addEventListener("click", async () => {
 
         if(questionsDone == questionsList.length){
             localStorage.setItem(`submitted-${quizID}-${username}`, "true");
-            redirectorUrl.value = `/quiz/leaderboard/${quizID}?watch=${username}`;
-            redirector.submit();
-            window.close();
+            myModal.show();
         }
-        else setNextQuestion();
+        else {
+            setNextQuestion();
+        }
     }
 })
