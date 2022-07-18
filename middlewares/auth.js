@@ -3,7 +3,7 @@ function isAuthenticated(req, res, next){
         next();
     }
     else{
-        res.redirect("/admin/login");
+        res.render("./admin/login.ejs");
     }
 }
 

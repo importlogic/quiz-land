@@ -91,6 +91,10 @@
   display: none;
 }
 
+.modal-body{
+  text-align: left;;
+}
+
 /* create page css  */
 .create-page-container{
   text-align: center;

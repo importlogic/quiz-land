@@ -27,7 +27,7 @@ const internalAPI = require("./routes/internalAPI.js");
 app.use(internalAPI);
 
 const mongoose = require("mongoose");
-mongoose.connect(`${process.env.MONGO_URL}/testing`);
+mongoose.connect(`${process.env.MONGO_URL}/quizlandDB`);
 
 const PORT = process.env.PORT || 3000;
 

@@ -44,11 +44,8 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-router.get("/admin/login", (req, res) => {
-    if(req.user){
-        res.redirect("/admin/dashboard");
-    }
-    res.render("./admin/login.ejs")
+router.get("/admin/login", authMiddleware.isAuthenticated, (req, res) => {
+    res.redirect("/admin/dashboard");
 })
 
 router.get("/admin/login/googleAuth", passport.authenticate('google', { 
@@ -71,6 +68,7 @@ router.get("/admin/logout", (req, res) => {
 })
 
 router.post("/admin/newQuiz/post", authMiddleware.isAuthenticated, async (req, res) => {
+    console.log(req.body)
     const response = await quizInterface.saveQuiz(req.user, req.body);
 
     if(response){

@@ -3,8 +3,35 @@ var numberOfQuestion = 0;
 const addQuestion = document.querySelector("#addQuestion");
 const removeQuestion = document.querySelector("#removeQuestion");
 const submit = document.querySelector("#submit-btn");
+const advancedSettings = document.querySelector("#advancedSettings");
 const questionContainer = document.querySelector("#questionContainer");
 const form = document.querySelector("form");
+
+
+document.querySelector("#timerInput").addEventListener("input", (event) => {
+    const input = event.target;
+    var value = event.target.value;
+
+    if(value == "") value = 0;
+
+    value = value.replace('.', '');
+    input.value = value;
+
+    var number = parseInt(input.value);
+
+    if(number < 5 || number > 12000) input.classList.add("is-invalid");
+    else input.classList.remove("is-invalid");
+})
+
+document.querySelector("#optionsRadios1").addEventListener("change", () => {
+    document.querySelector("#timerInputDiv").classList.add("hidden");
+})
+document.querySelector("#optionsRadios2").addEventListener("change", () => {
+    document.querySelector("#timerInputDiv").classList.remove("hidden");
+})
+document.querySelector("#optionsRadios3").addEventListener("change", () => {
+    document.querySelector("#timerInputDiv").classList.remove("hidden");
+})
 
 function checkValid(){
     var valid = true;
@@ -94,22 +121,35 @@ submit.addEventListener("click", async () => {
             questions.push(nextQuestion);
         }
 
-        const config = {
-            url: "/admin/newQuiz/post",
-            method: "post",
-            data: {
-                quizName,
-                questions
-            }
-        }
+        var timerState = 0;
+        if(document.querySelector("#optionsRadios2").checked) timerState = 1;
+        else if(document.querySelector("#optionsRadios3").checked) timerState = 2;
 
-        const res = await axios(config);
-        console.log(res);
-        if(res.data.status != "OK"){
-            alert("Couldn't submit quiz. Please try again after some time.");
+        var timerValue = parseInt(document.querySelector("#timerInput").value);
+
+        if(timerState && (timerValue < 5 || timerValue > 12000)){
+            alert("Please enter a valid time in seconds.");
         }
         else{
-            location.reload();
+            const config = {
+                url: "/admin/newQuiz/post",
+                method: "post",
+                data: {
+                    quizName,
+                    questions,
+                    timerState,
+                    timerValue
+                }
+            }
+
+            const res = await axios(config);
+            console.log(res);
+            if(res.data.status != "OK"){
+                alert("Couldn't submit quiz. Please try again after some time.");
+            }
+            else{
+                location.reload();
+            }
         }
     }
     loader.setAttribute("href", null);
