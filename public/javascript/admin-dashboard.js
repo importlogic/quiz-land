@@ -1,6 +1,6 @@
 const loader = document.querySelector("#loaderEnabler");
-const quizStartLink = "http://localhost:3000/quiz/start?invite=";
-const quizLeaderboardLink = "http://localhost:3000/quiz/leaderboard/";
+const quizStartLink = "https://quizland-importlogic.herokuapp.com/quiz/start?invite=";
+const quizLeaderboardLink = "https://quizland-importlogic.herokuapp.com/quiz/leaderboard/";
 
 // sidebar 
 const pages = [ "dashboard-page", "create-page"];
