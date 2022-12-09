@@ -21,7 +21,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "https://quizland-importlogic.herokuapp.com/admin/loginSuccess",
+    callbackURL: "https://quizland.up.railway.app/admin/loginSuccess",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   (accessToken, refreshToken, profile, done) => {
