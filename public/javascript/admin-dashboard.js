@@ -1,6 +1,6 @@
 const loader = document.querySelector("#loaderEnabler");
-const quizStartLink = "https://quiz-land-7el6.onrender.com/quiz/start?invite=";
-const quizLeaderboardLink = "https://quiz-land-7el6.onrender.com/quiz/leaderboard/";
+const quizStartLink = "https://quizland.cyclic.app/quiz/start?invite=";
+const quizLeaderboardLink = "https://quizland.cyclic.app/quiz/leaderboard/";
 
 // sidebar 
 const pages = [ "dashboard-page", "create-page"];
